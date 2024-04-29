@@ -20,11 +20,14 @@ public class Main {
         employee.setId(323443);
         employee.setName("Manikanta");
         employee.setSalary(10000000L);
+        employee.setId(1234);
+        employee.setName("Sathish");
+        employee.setSalary(10000000L);
 
-
-        repository.save(employee);
-        repository.findById(323443);
-        repository.deleteById(323443);
-
+      //  repository.save(employee);
+      //  repository.findById(323443);
+      //  repository.deleteById(323443);
+      //  repository.deleteAll();
+        repository.count();
     }
 }

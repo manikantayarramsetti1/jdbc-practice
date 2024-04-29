@@ -92,6 +92,17 @@ public class EmployeeRepository implements CrudRepository<Employee, Integer> {
 
     @Override
     public long count() {
+        String sql = "SELECT COUNT(*) FROM employee";
+        try(Connection conn = this.dataSource.getConnection();
+        PreparedStatement countStatement = conn.prepareStatement(sql)) {
+            ResultSet resultSet = countStatement.executeQuery();
+            while (resultSet.next()) {
+                System.out.println(resultSet.getInt(1) + "is the count");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return 0;
     }
 
@@ -111,6 +122,7 @@ public class EmployeeRepository implements CrudRepository<Employee, Integer> {
     @Override
     public void delete(Employee entity) {
 
+
     }
 
     @Override
@@ -125,6 +137,13 @@ public class EmployeeRepository implements CrudRepository<Employee, Integer> {
 
     @Override
     public void deleteAll() {
-
+        String sql = "DELETE FROM employee";
+        try(Connection conn = this.dataSource.getConnection();
+        PreparedStatement deleteStatement = conn.prepareStatement(sql)) {
+            int del = deleteStatement.executeUpdate();
+            System.out.println(del + "deleted all employee");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
