@@ -22,8 +22,9 @@ public class Main {
         employee.setSalary(10000000L);
 
 
-       // repository.save(employee);
+        repository.save(employee);
         repository.findById(323443);
+        repository.deleteById(323443);
 
     }
 }

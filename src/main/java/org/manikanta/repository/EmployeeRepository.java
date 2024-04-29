@@ -96,8 +96,16 @@ public class EmployeeRepository implements CrudRepository<Employee, Integer> {
     }
 
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        String sql = "DELETE FROM employee where id = ?";
+        try (Connection conn = this.dataSource.getConnection();
+             PreparedStatement deleteStatement = conn.prepareStatement(sql)) {
+            deleteStatement.setInt(1,id);
+            int del =deleteStatement.executeUpdate();
+            System.out.println(del + " deleted record");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
